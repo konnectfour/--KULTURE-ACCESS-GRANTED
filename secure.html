@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Validating Access...</title>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <style>
+    body { background: black; color: #FF3EA5; font-family: sans-serif; text-align: center; padding: 4rem; }
+    h1 { font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>🔐 Validating your access to the secured file...</h1>
+
+  <script>
+    const config = {
+      domain: "kultd.ca.auth0.com",
+      client_id: "iKvkLAGJIO1kiowy0At5FlLqPy6n21"
+    };
+
+    window.onload = async () => {
+      const auth0 = await createAuth0Client(config);
+      const isAuthenticated = await auth0.isAuthenticated();
+
+      if (isAuthenticated) {
+        // Authenticated? Redirect to PDF
+        window.location.href = "secure.pdf";
+      } else {
+        // Not logged in? Go back to login page
+        window.location.href = "index.html";
+      }
+    };
+  </script>
+</body>
+</html>
