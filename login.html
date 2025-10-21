@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔐 KULTURE ID ACCESS</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body {
+      background: #000;
+      color: #FF3EA5;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+      padding: 4rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      background: transparent;
+      border: 2px solid #FF3EA5;
+      padding: 0.75rem 1.5rem;
+      color: #FF3EA5;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: #FF3EA5;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 KULTURE: ACCESS GRANTED</h1>
+  <p>Sign in below to access your secured PDF.</p>
+  <button class="btn" onclick="netlifyIdentity.open()">Login / Register</button>
+
+  <script>
+    netlifyIdentity.on('init', user => {
+      if (!user) return;
+      netlifyIdentity.on('login', user => {
+        window.location.href = '/secure.pdf';
+      });
+    });
+    netlifyIdentity.init();
+  </script>
+</body>
+</html>
