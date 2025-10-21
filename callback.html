@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+</head>
+<body>
+  <script>
+    const config = {
+      domain: "kultureid.ca.auth0.com",
+      client_id: "i4PKvkLAGKIO1kiowy0At5FlLqTy6n21",
+      redirect_uri: window.location.origin + "/callback.html"
+    };
+
+    window.onload = async () => {
+      const auth0 = await createAuth0Client(config);
+      await auth0.handleRedirectCallback();
+      const isAuthenticated = await auth0.isAuthenticated();
+
+      if (isAuthenticated) {
+        window.location.href = "/secure.pdf";
+      } else {
+        window.location.href = "/index.html";
+      }
+    };
+  </script>
+</body>
+</html>
