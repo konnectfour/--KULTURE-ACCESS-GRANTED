@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kulture ID Login</title>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <style>
+    body { background: black; color: #FF3EA5; font-family: sans-serif; text-align: center; padding: 4rem; }
+    button { padding: 1rem 2rem; background: transparent; color: #FF3EA5; border: 2px solid #FF3EA5; border-radius: 8px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>🔐 Login to Access KULTURE PDF</h1>
+  <button id="login">Login with Auth0</button>
+
+  <script>
+    let auth0 = null;
+    const config = {
+      domain: "kultureid.ca.auth0.com",
+      client_id: "i4PKvkLAGKIO1kiowy0At5FlLqTy6n21",
+      redirect_uri: window.location.origin + "/callback.html"
+    };
+
+    const login = async () => {
+      await auth0.loginWithRedirect();
+    };
+
+    window.onload = async () => {
+      auth0 = await createAuth0Client(config);
+      const isAuthenticated = await auth0.isAuthenticated();
+
+      if (isAuthenticated) {
+        window.location.href = "/secure.pdf";
+        return;
+      }
+
+      document.getElementById("login").addEventListener("click", login);
+    };
+  </script>
+</body>
+</html>
